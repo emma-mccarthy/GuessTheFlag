@@ -22,7 +22,7 @@ struct ContentView: View {
             RadialGradient(stops: [
                 .init(color: Color(red: 0.1, green: 0.03, blue: 0.13), location: 0.3),
                 .init(color: Color(red: 0.76, green: 0.15, blue: 0.26), location: 0.3)
-            ], center: .bottom, startRadius: 200, endRadius: 700)
+                ], center: .bottom, startRadius: 200, endRadius: 700)
                 .ignoresSafeArea()
                 
 
@@ -33,28 +33,28 @@ struct ContentView: View {
                     .font(.largeTitle.bold())
                     .foregroundColor(.white)
                 
-                VStack(spacing: 30) {
-                    VStack {
-                        Text("Tap the flag of")
-                            .foregroundColor(.white)
-                            .font(.subheadline.weight(.heavy))
+                    VStack(spacing: 30) {
+                        VStack {
+                            Text("Tap the flag of")
+                                .foregroundColor(.white)
+                                .font(.subheadline.weight(.heavy))
+                            
+                            Text(countries[correctAnswer])
+                                .foregroundColor(.white)
+                                .font(.largeTitle.weight(.semibold))
+                        }
                         
-                        Text(countries[correctAnswer])
-                            .foregroundColor(.white)
-                            .font(.largeTitle.weight(.semibold))
-                    }
-                    
-                    ForEach(0..<3) { number in
-                        Button {
-                            flagTapped(number)
-                        } label: {
-                            Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 10)
+                        ForEach(0..<3) { number in
+                            Button {
+                                flagTapped(number)
+                            } label: {
+                                Image(countries[number])
+                                    .renderingMode(.original)
+                                    .clipShape(Capsule())
+                                    .shadow(radius: 10)
+                            }
                         }
                     }
-                }
                 Spacer()
                 Spacer()
                 
@@ -76,27 +76,27 @@ struct ContentView: View {
     
     
     
-        func flagTapped(_ number: Int) {
-            if number == correctAnswer {
-                scoreTitle = "Correct! This is the flag of \(countries[correctAnswer])"
-                scoreValue += 1
-            } else {
-                scoreTitle = "Wrong! This is the flag of \(countries[number])"
-            }
-            showingScore = true
-            currentRound += 1
+    func flagTapped(_ number: Int) {
+        if number == correctAnswer {
+            scoreTitle = "Correct! This is the flag of \(countries[correctAnswer])"
+            scoreValue += 1
+        } else {
+            scoreTitle = "Wrong! This is the flag of \(countries[number])"
         }
-        
-        func reset() {
-            if currentRound > 8 {
-            scoreValue = 0
-            }
-        }
+        showingScore = true
+        currentRound += 1
+    }
     
-        func askQuestion() {
-            countries.shuffle()
-            correctAnswer = Int.random(in: 0...2)
+    func reset() {
+        if currentRound > 8 {
+        scoreValue = 0
         }
+    }
+
+    func askQuestion() {
+        countries.shuffle()
+        correctAnswer = Int.random(in: 0...2)
+    }
     
 
 
